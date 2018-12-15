@@ -50,6 +50,7 @@ An collection of Chinese nlp corpus including basic Chinese syntactic wordset, s
 |领域词库| 搜狗输入法领域词库| 超过1W个领域的搜狗输入法词库，txt版本|
 |领域词库| 职位词典| 基于百万级拉钩JD网抽取形成的职位词典|
 |领域词库| 敏感词词词库| 敏感词词库，包括政治、反动等词|
+|领域词库| 情感词词库| 大连理工大学、知网、香港中文大学、台湾大学、boson等公开情感词典|
 
 # 领域语料库
 
