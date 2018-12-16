@@ -42,7 +42,7 @@ An collection of Chinese nlp corpus including basic Chinese syntactic wordset, s
 		    param = {'url': date_url, 'date': date}
 		    yield scrapy.Request(url=date_url, meta=param, callback=self.get_urllist, dont_filter=True)
 
-	    '''get_urllist'''
+	    '''获取页面新闻列表'''
 	    def get_urllist(self, response):
 		selector = etree.HTML(response.text)
 		date_url = response.meta['url']
@@ -51,7 +51,7 @@ An collection of Chinese nlp corpus including basic Chinese syntactic wordset, s
 		    param = {'url':url , 'date': response.meta['date']}
 		    yield scrapy.Request(url=url, meta=param, callback=self.page_parser, dont_filter=True)
 
-	    '''网页解析'''
+	    '''新闻字段内容解析'''
 	    def page_parser(self, response):
 		selector = etree.HTML(response.text)
 		articles = selector.xpath('//div[@class="article"]')
