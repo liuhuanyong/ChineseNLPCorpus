@@ -1,5 +1,5 @@
 # ChineseNLPcorpus
-An collection of Chinese nlp corpus including basic Chinese syntactic wordset, semantic wordset, historic corpus and evaluate corpus. 中文自然语言处理的语料集合，包括语义词、领域共时、历时语料库、评测语料库等。本项目简单谈谈自己对语言资源的感想以及目前自己进行语言资源构建的现状。  
+An collection of Chinese nlp corpus including basic Chinese syntatic and semantic wordset, semantic wordset, historic corpus and evaluate corpus. 中文自然语言处理的语料集合，包括语义词、领域共时、历时语料库、评测语料库等。本项目简单谈谈自己对语言资源的感想以及目前自己进行语言资源构建的现状。  
 
 # 介绍 
 &emsp;&emsp;语言资源，本身是一个宽泛的概念，即语言+资源，语言指的是资源的限定域，资源=资+源，是资料的来源或者汇总，加在一起，也就形成了这样一种界定：任何语言单位形成的集合，都可以称为语言资源。语言资源是自然语言处理任务中的一个必不可少的组成部分，一方面语言资源是相关语言处理任务的支撑，为语言处理任务提供先验知识进行辅助，另一方面，语言处理任务也为语言资源提出了需求，并能够对语言资源的搭建、扩充起到技术性的支持作用。因此，随着自然语言处理技术的不断发展，自然语言处理需求在各个领域的不断扩张、应用，相关语言资源的构建占据了越来越为重要的地位。作者在硕士期间所在的研究机构为国家语言资源监测与研究平面媒体中心，深受导师所传授的语言资源观影响，毕业后在实际的学习、工作过程中，动手实践，形成了自己的一些浅薄的语言资源认识，现在写出来，供大家一起讨论，主要介绍一些自己对语言资源的搜索，搭建过程中的一些心得以及自己目前在语言资源建设上的一些工作。  
