@@ -26,6 +26,52 @@ An collection of Chinese nlp corpus including basic Chinese syntactic wordset, s
 &emsp;&emsp;4，语言资源的共享与联盟问题。语言资源是否共享，其实是一个与业务敏感以及开源意识想结合的一种决策，有的资源因为某种业务敏感或者开源意识不够open而无法共享，当然还有其他因素成分在，不过，语言资源最好是需要共享的，这样能够最大力度的发挥语言资源在各个领域的应用。语言资源的联盟问题，更像是对开源语言资源的一种链接与互联。这类问题是对当前的资源零散、碎片化问题的一个思考，前面也说到，目前情感分析的词表有很多个，语法和语义词库也有很多个，但每个人在构建时的出发点不同，构建者也分布在不同的高校或机构当中，这些资源虽然在个数上会有增长，但随着时间的推移，这种零散化的现象将会越来越严重。
 
 # 语言资源的实践
+&emsp;&emsp;本项目以采集公开的人民日报与参考消息为例进行历时的新闻采集为例, 公开网站中公开了1946-2003年的人民日报语料,1957-2002年的参考消息语料, 采集这种具有长远历史信息的语料对于历史人文研究以及语言演变有重大意义,本项目放在newspaper目录下.  
+运行方式: scrapy crawl travel   
+主要函数包括:  
+
+	class TravelSpider(scrapy.Spider):
+	    name = 'travel'
+	    '''资讯采集主控函数'''
+	    def start_requests(self):
+		Data = BuildData()
+		date_list = Data.create_dates()
+		for date in date_list:
+		    print(date)
+		    date_url = 'http://www.laoziliao.net/ckxx/%s'%date
+		    param = {'url': date_url, 'date': date}
+		    yield scrapy.Request(url=date_url, meta=param, callback=self.get_urllist, dont_filter=True)
+
+	    '''get_urllist'''
+	    def get_urllist(self, response):
+		selector = etree.HTML(response.text)
+		date_url = response.meta['url']
+		urls = [i.split('#')[0] for i in selector.xpath('//ul/li/a/@href') if date_url in i]
+		for url in set(urls):
+		    param = {'url':url , 'date': response.meta['date']}
+		    yield scrapy.Request(url=url, meta=param, callback=self.page_parser, dont_filter=True)
+
+	    '''网页解析'''
+	    def page_parser(self, response):
+		selector = etree.HTML(response.text)
+		articles = selector.xpath('//div[@class="article"]')
+		titles = selector.xpath('//h2/text()')
+		contents = []
+		for article in articles:
+		    content = article.xpath('string(.)')
+		    contents.append(content)
+		papers = zip(titles, contents)
+		for i in papers:
+		    item = TravelspiderItem()
+		    item['url'] = response.meta['url']
+		    item['date'] = response.meta['date']
+		    item['title'] = i[0]
+		    item['content'] = i[1] 
+		    yield item
+		return
+
+# 语言资源构建现状 
+
    作者在学习和工作之余，根据语言资源搭建策略，构建起了语义词库、领域词库、领域语料库、评测语料库。种类约50种，具体如下：
 
 # 语义知识库
